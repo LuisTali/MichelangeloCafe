@@ -5,7 +5,7 @@ import './TableOrdersPopUp.css';
 import { products } from "../../../Data/products.jsx";
 
 
-export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen}) =>{
+export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopupOpen, setPopupOpen}) =>{
     const inputRef = useRef(null);
     const {isModalOpen,setModalOpen,modalContent,setModalContent,successModal,setSuccessModal} = useContext(ModalContext);
     
@@ -21,13 +21,14 @@ export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen}) =>{
 
     const closePopUp = () =>{
         setOrdersOpen(false);
+        setPopupOpen(false);
     }
     
     return <div id={`popUpTableOrder${id}`} className='popUpTableOrder'>
         <label>{`Ordenes Mesa ${id}`}</label>
         <input type="text" ref={inputRef}></input>
         <select>
-            {products.filter((product) => product.title.startsWith(inputRef.current.value)).map((product) => <option>{product.title}</option>)}
+            {products.map((product) => <option>{product.title}</option>)}
         </select>
         <button onClick={handleSubmit}>SUBMIT</button>
         <button onClick={closePopUp} id="closePopUpButton">X</button>
