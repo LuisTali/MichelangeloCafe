@@ -4,12 +4,16 @@ import './Modal.css';
 export const Modal = ({setIsOpen,state,message,setAnswer}) =>{
 
     useEffect(()=>{
-        if(state != 3){
-            setTimeout(()=>{
+        if(state < 3){
+            const timeoutId = setTimeout(()=>{
                 setIsOpen(false);
-            },3000);
+            },2000);
+            return () => clearTimeout(timeoutId); //Limpia el timeout para que si se abre un Modal distinto, 
+            //el timeout anterior no se siga aplicando y lo cierre automaticamente.
+        }else{
+            
         }
-    },[])
+    },[state])
 
     const handleAnswerClick = (option) =>{
         setAnswer(option);
