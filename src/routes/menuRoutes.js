@@ -4,7 +4,7 @@ import { TablesPage } from "../components/pages/tablesPage/TablesPage.jsx";
 export const menuRoutes = [
     {
         id:'home',
-        path:'/home',
+        path:'/',
         Element: TablesPage
     },
     {

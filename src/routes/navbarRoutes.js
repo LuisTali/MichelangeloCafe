@@ -1,7 +1,7 @@
 const navbarRoutes = [
     {
         id: 'home',
-        path: '/home',
+        path: '/',
         title: 'Home'
     },
     {
