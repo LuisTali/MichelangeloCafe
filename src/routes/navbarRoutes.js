@@ -11,7 +11,7 @@ const navbarRoutes = [
     },
     {
         id: 'help',
-        path: '/',
+        path: '/help',
         title: 'Help'
     }
 ]
