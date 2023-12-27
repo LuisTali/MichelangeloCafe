@@ -4,3 +4,8 @@
     height: fit-content;
     padding: 1rem;
 }
+.orders{
+    display: flex;
+    gap:3rem;
+    flex-wrap: wrap;
+}

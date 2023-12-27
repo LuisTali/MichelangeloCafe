@@ -5,13 +5,25 @@ import './Table.css';
 import imageWood from '../../../assets/brown-wooden-flooring.jpg';
 import { Modal } from "../modal/Modal.jsx";
 import { PopupOpenContext } from "../../../context/PopUpOpenContext.jsx";
+import { setDoc, doc, addDoc } from "firebase/firestore";
+import { db } from "../../../firebaseConfig.jsx";
 
 export const Table = ({id,order,tables,setTables}) =>{
     const [ordersOpen,setOrdersOpen] = useState(false);
-    const [chargeId,setChargeId] = useState();
+    const [chargeId,setChargeId] = useState(); //Se creo para setear el Id de la mesa a cobrar, ya que useEffect obtenia siempre el ultimo Id del arreglo Tables.
     const [answer,setAnswer] = useState(''); //Se usa para que el modal setee una respuesta y poder cobrar la mesa o no.
     const {isModalOpen,setModalOpen,modalContent,setModalContent,successModal,setSuccessModal} = useContext(ModalContext);
     const {isPopupOpen,setPopupOpen} = useContext(PopupOpenContext);
+    
+    function generateUUID() {
+        var d = new Date().getTime();
+        var uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+        return uuid;
+    }
     
     const handleClick = () =>{
         if(isPopupOpen == false){
@@ -41,8 +53,25 @@ export const Table = ({id,order,tables,setTables}) =>{
 
     useEffect(()=>{
         if(answer == 'yes'){
+            let id = generateUUID();
+
+            let total = 0;
+
+            tables[chargeId - 1].order.map((item) =>{
+                total += item.price
+            });
+
+            let order = {
+                client: 'Luis Taliercio',
+                items:tables[chargeId - 1].order,
+                totalPrice: total,
+                mesa: `Mesa ${chargeId}`
+            };
+            setDoc(doc(db,"Orders",id),order)
+            .then((res)=>console.log('exito'))
+            .catch((error) => console.log(error));
+
             let newTables = [...tables]; 
-            console.log(tables[chargeId - 1]);
             newTables[chargeId - 1].order = []
             setTables(newTables);
         }
