@@ -30,3 +30,7 @@
     gap: 1rem;
     margin-top: 1rem;
 }
+
+.options button{
+    width: 40px;
+}

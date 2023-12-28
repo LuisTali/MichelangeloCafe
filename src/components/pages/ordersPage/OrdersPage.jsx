@@ -37,6 +37,7 @@ const OrdersPage = () =>{
                         <div className="orderItems">
                             {order.items.map((item,index) => <li key={index}>{item.title} - ${item.price}</li>)}
                         </div>
+                        <h4>Total: ${order.totalPrice}</h4>
                     </div>
                 })}
             </div>

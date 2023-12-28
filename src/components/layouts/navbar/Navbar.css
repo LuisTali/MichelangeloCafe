@@ -3,10 +3,28 @@
     display: flex;
     gap: 1rem;
     padding: 1rem;
+    width: 100%;
+    align-items: center;
 }
-.navbar a{
+.navbar .links a{
     color: wheat;
     font-weight: 600;
+    font-size: 1.5rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.links{
+    display: flex;
+    gap: 1rem;
+}
+
+.buttonEditTables{
+    position: absolute;
+    font-weight: 600;
+    right: 0;
+    margin-right: 2rem;
+    color: wheat;
     font-size: 1.5rem;
     text-decoration: none;
     cursor: pointer;

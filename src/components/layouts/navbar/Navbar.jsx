@@ -6,7 +6,10 @@ import './Navbar.css';
 const Navbar = () =>{
 
     return <div className="navbar">
-        {navbarRoutes.map((route) => <Link key={route.id} to={route.path}>{route.title}</Link>)}
+        <div className="links">
+            {navbarRoutes.map((route) => <Link key={route.id} to={route.path}>{route.title}</Link>)}
+        </div>
+        <a className="buttonEditTables">Edit Tables</a>
     </div>
 
 }
