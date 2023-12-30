@@ -8,28 +8,21 @@ import { products } from "../../../Data/products.jsx";
 export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopupOpen, setPopupOpen}) =>{
     const [search,setSearch] = useState("");
     //const [newOrder,setNewOrder] = useState(products[0]);
-    const selectRef = useRef(products[0]);
     const {isModalOpen,setModalOpen,modalContent,setModalContent,successModal,setSuccessModal} = useContext(ModalContext);
     
     const handleSubmit = () =>{
-        let ee = document.getElementById("selectOrder"); //Obtiene select
-        let newOrder = products.filter((product) => product.title == ee.value); //Setea producto con el encontrado en el select
+        let selectOrder = document.getElementById("selectOrder"); //Obtiene select
+        let newOrder = products.filter((product) => product.title == selectOrder.value); //Setea producto con el encontrado en el select
         order.push(newOrder[0]); //Pushea el producto al arreglo Orden asociado a la mesa
         let newTables = [...tables];
         newTables.filter((table) => table.id == id).map((table) => table.order = order); //Setea la orden de la mesa en base a su Id
         setTables(newTables); //Setea las mesas con las ordenes nuevas
         setSearch(''); //Devuelve el filtro de busqueda a default
-        ee.selectedIndex = 0; //Select posicionado de vuelta al primer producto
+        selectOrder.selectedIndex = 0; //Select posicionado de vuelta al primer producto
         document.getElementById("filterSelect").value = ''; //No uso mas useRef asi que cambio su valor asi
         setModalContent("Producto agregado correctamente");
         setSuccessModal(1);
         setModalOpen(true);
-    }
-
-    const handleSelect = (e) =>{
-        console.log(ee.value);
-        
-        setNewOrder(order[0]);
     }
 
     const closePopUp = () =>{
@@ -41,7 +34,7 @@ export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopu
         <label>{`Ordenes Mesa ${id}`}</label>
 
         <input id="filterSelect" type="text" onChange={(e) => setSearch(e.target.value)}></input>
-        <select id="selectOrder" onChange={(e)=>handleSelect(e)} ref={selectRef}>
+        <select id="selectOrder">
             {products.filter((product) => (search != '' ? product.title.toLowerCase().startsWith(search.toLowerCase()) : product)).map((product,index) => <option key={index}>{product.title}</option>)}
         </select>
 
