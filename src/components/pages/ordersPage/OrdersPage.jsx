@@ -13,7 +13,6 @@ const OrdersPage = () =>{
         .then((res)=>{
             console.log(res);
             let ordersDb = res.docs.map((item) =>{ 
-                console.log(item.data());
                 return {
                     ...item.data(),
                     id:item.id
@@ -21,7 +20,6 @@ const OrdersPage = () =>{
             })
             setOrders(ordersDb);
             setLoading(false);
-            console.log(ordersDb);
         })
         .catch((error) => console.log(error))
     },[]);
@@ -29,8 +27,8 @@ const OrdersPage = () =>{
     if(loading != true){
         return <div className="ordersPage">
             <div className="orders">
-                {orders.map((order)=>{
-                    return <div className="order">
+                {orders.map((order,index)=>{
+                    return <div className="order" key={index}>
                         <h4>Id Orden: {order.id}</h4>
                         <h3>Cliente: {order.client}</h3>
                         <h4>{order.mesa}</h4>
@@ -38,6 +36,8 @@ const OrdersPage = () =>{
                             {order.items.map((item,index) => <li key={index}>{item.title} - ${item.price}</li>)}
                         </div>
                         <h4>Total: ${order.totalPrice}</h4>
+                        <h5>Fecha: {order.date}</h5>
+                        
                     </div>
                 })}
             </div>

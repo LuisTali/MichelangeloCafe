@@ -35,9 +35,14 @@ label{
     border-top-right-radius: 20px;
     box-shadow: -2px 2px 20px black;
     border: 0px;
+    width: 30px;
+    height: 30px;
 }
 #selectOrder{
     padding: 0.5rem;
+}
+#filterSelect{
+    width: 200px;
 }
 
 @media screen and (max-width:400px){

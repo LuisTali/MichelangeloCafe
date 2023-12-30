@@ -51,6 +51,11 @@ export const Table = ({id,order,tables,setTables}) =>{
         }
     }
 
+    const makeDate = () =>{
+        let date = new Date();
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()}:${date.getSeconds()}`
+    }
+
     useEffect(()=>{
         if(answer == 'yes'){
             let id = generateUUID();
@@ -61,11 +66,14 @@ export const Table = ({id,order,tables,setTables}) =>{
                 total += item.price
             });
 
+            let dateFormatted = makeDate();
+
             let order = {
                 client: 'Luis Taliercio',
+                date: dateFormatted,
                 items:tables[chargeId - 1].order,
                 totalPrice: total,
-                mesa: `Mesa ${chargeId}`
+                mesa: `Mesa ${chargeId}`,
             };
             setDoc(doc(db,"Orders",id),order)
             .then((res)=>console.log('exito'))
