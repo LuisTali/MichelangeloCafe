@@ -12,7 +12,9 @@ export const Table = ({id,order,tables,setTables}) =>{
     const [ordersOpen,setOrdersOpen] = useState(false);
     const [chargeId,setChargeId] = useState(); //Se creo para setear el Id de la mesa a cobrar, ya que useEffect obtenia siempre el ultimo Id del arreglo Tables.
     const [answer,setAnswer] = useState(''); //Se usa para que el modal setee una respuesta y poder cobrar la mesa o no.
-    const {isModalOpen,setModalOpen,modalContent,setModalContent,successModal,setSuccessModal} = useContext(ModalContext);
+    const [openTable,setOpenTable] = useState('');
+    const [client,setClient] = useState({});
+    const {isModalOpen,setModalOpen,modalContent,setModalContent,stateModal,setStateModal} = useContext(ModalContext);
     const {isPopupOpen,setPopupOpen} = useContext(PopupOpenContext);
     
     function generateUUID() {
@@ -27,8 +29,16 @@ export const Table = ({id,order,tables,setTables}) =>{
     
     const handleClick = () =>{
         if(isPopupOpen == false){
-            setPopupOpen(true);
-            setOrdersOpen(!ordersOpen);
+            if(openTable == 'yes'){
+                setPopupOpen(true);
+                setOrdersOpen(!ordersOpen);
+            }else{
+                setChargeId(id);
+                setPopupOpen(true);
+                setStateModal(3);
+                setModalContent("Desea abrir la mesa " + id + "?")
+                setModalOpen(true);
+            }
         }
     }
 
@@ -41,7 +51,7 @@ export const Table = ({id,order,tables,setTables}) =>{
         if(isPopupOpen == false && order.length > 0){
             setChargeId(id);
             setPopupOpen(true);
-            setSuccessModal(3); //3 es el Modal para confirmar
+            setStateModal(4); //3 es el Modal para confirmar
             let sum = 0;
             order.map((item) =>{
                 sum += item.price
@@ -82,11 +92,13 @@ export const Table = ({id,order,tables,setTables}) =>{
             let newTables = [...tables]; 
             newTables[chargeId - 1].order = []
             setTables(newTables);
+            setOpenTable('no');
         }
         setChargeId("");
         setPopupOpen(false);
         setAnswer('');
-    },[answer])
+        if(openTable == 'no') setOpenTable('');
+    },[answer,openTable])
 
     return <>
     <div className="table" id={`table${id}`} onClick={()=>handleClick()} style={{backgroundImage:`url(${imageWood})`}}>
@@ -97,9 +109,12 @@ export const Table = ({id,order,tables,setTables}) =>{
         <button className="buttonCharge" onClick={(e)=>handleCharge(e)}>COBRAR</button>
     </div>
     {ordersOpen && <TableOrdersPopUp id={id} order={order} tables={tables} setTables={setTables} setOrdersOpen={setOrdersOpen} isPopupOpen={isPopupOpen} setPopupOpen={setPopupOpen}/>}
-    {//SuccessModal == 3 ya que es el numero asignado para que sea un Modal Confirmacion, si quito eso se abren todos los modals.
-    (isModalOpen && successModal == 3 && chargeId == id) && <Modal state={successModal} setIsOpen={setModalOpen} message={modalContent} setAnswer={setAnswer}/>
+    {//SuccessModal == 4 ya que es el numero asignado para que sea un Modal Confirmacion + Input, si quito eso se abren todos los modals.
+    (isModalOpen && stateModal == 4 && chargeId == id && openTable == 'yes') && <Modal state={stateModal} setIsOpen={setModalOpen} message={modalContent} setAnswer={setAnswer} client={client} setClient={setClient}/>
     }
+    {//SuccessModal == 3 ya que es el numero asignado para que sea un Modal Confirmacion, si quito eso se abren todos los modals.
+    (isModalOpen && stateModal == 3 && chargeId == id && openTable != 'yes') && <Modal state={stateModal} setIsOpen={setModalOpen} message={modalContent} setAnswer={setOpenTable}/>
+}
     </> 
         
 }

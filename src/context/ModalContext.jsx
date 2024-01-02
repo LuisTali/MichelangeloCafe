@@ -5,10 +5,10 @@ export const ModalContext = createContext();
 const ModalContextProvider = ({children}) =>{
     const [isModalOpen,setModalOpen] = useState(false);
     const [modalContent,setModalContent] = useState("");
-    const [successModal,setSuccessModal] = useState(false);
+    const [stateModal,setStateModal] = useState(false);
 
     const data = {
-        isModalOpen,setModalOpen,modalContent,setModalContent,successModal,setSuccessModal
+        isModalOpen,setModalOpen,modalContent,setModalContent,stateModal,setStateModal
     }
 
     return <ModalContext.Provider value={data}>{children}</ModalContext.Provider>

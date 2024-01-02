@@ -5,10 +5,10 @@ import './TableOrdersPopUp.css';
 import { products } from "../../../Data/products.jsx";
 
 
-export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopupOpen, setPopupOpen}) =>{
+export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopupOpen, setPopupOpen,openTable}) =>{
     const [search,setSearch] = useState("");
     //const [newOrder,setNewOrder] = useState(products[0]);
-    const {isModalOpen,setModalOpen,modalContent,setModalContent,successModal,setSuccessModal} = useContext(ModalContext);
+    const {isModalOpen,setModalOpen,modalContent,setModalContent,stateModal,setStateModal} = useContext(ModalContext);
     
     const handleSubmit = () =>{
         let selectOrder = document.getElementById("selectOrder"); //Obtiene select
@@ -21,7 +21,7 @@ export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopu
         selectOrder.selectedIndex = 0; //Select posicionado de vuelta al primer producto
         document.getElementById("filterSelect").value = ''; //No uso mas useRef asi que cambio su valor asi
         setModalContent("Producto agregado correctamente");
-        setSuccessModal(1);
+        setStateModal(1);
         setModalOpen(true);
     }
 
@@ -40,6 +40,6 @@ export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopu
 
         <button onClick={handleSubmit}>SUBMIT</button>
         <button onClick={closePopUp} id="closePopUpButton">X</button>
-        {isModalOpen && <Modal setIsOpen={setModalOpen} state={successModal} message={modalContent}/>}
+        {isModalOpen && <Modal setIsOpen={setModalOpen} state={stateModal} message={modalContent}/>}
     </div>
 }
