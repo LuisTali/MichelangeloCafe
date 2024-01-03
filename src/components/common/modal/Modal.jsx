@@ -52,9 +52,10 @@ export const Modal = ({setIsOpen,state,message,setAnswer,client,setClient}) =>{
                                 },3000)
                             }
                         }
+                        return;
                     }
-                    //setAnswer(option);
-                    //setIsOpen(false);
+                    setAnswer(option);
+                    setIsOpen(false);
                 }
             }else{
                 setAnswer(option);

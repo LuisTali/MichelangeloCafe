@@ -68,6 +68,7 @@ export const Table = ({id,order,tables,setTables}) =>{
 
     useEffect(()=>{
         if(answer == 'yes'){
+            console.log(client);
             let id = generateUUID();
 
             let total = 0;
@@ -79,7 +80,8 @@ export const Table = ({id,order,tables,setTables}) =>{
             let dateFormatted = makeDate();
 
             let order = {
-                client: 'Luis Taliercio',
+                client: client.name,
+                phone: client.phone,
                 date: dateFormatted,
                 items:tables[chargeId - 1].order,
                 totalPrice: total,
@@ -90,14 +92,14 @@ export const Table = ({id,order,tables,setTables}) =>{
             .catch((error) => console.log(error));
 
             let newTables = [...tables]; 
-            newTables[chargeId - 1].order = []
+            newTables[chargeId - 1].order = [] //Setea ordenes de la mesa nuevamente a vacio
             setTables(newTables);
-            setOpenTable('no');
+            setOpenTable('no'); //Cierra la mesa
         }
         setChargeId("");
         setPopupOpen(false);
         setAnswer('');
-        if(openTable == 'no') setOpenTable('');
+        if(openTable == 'no') setOpenTable(''); //Si elige no abrir la mesa, setea nuevamente a '' para poder cliquear nuevamente el popup AbrirMesa
     },[answer,openTable])
 
     return <>

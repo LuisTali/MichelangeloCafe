@@ -31,6 +31,7 @@ const OrdersPage = () =>{
                     return <div className="order" key={index}>
                         <h4>Id Orden: {order.id}</h4>
                         <h3>Cliente: {order.client}</h3>
+                        <h4>Telefono: {order.phone}</h4>
                         <h4>{order.mesa}</h4>
                         <div className="orderItems">
                             {order.items.map((item,index) => <li key={index}>{item.title} - ${item.price}</li>)}
