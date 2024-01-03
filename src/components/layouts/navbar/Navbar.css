@@ -5,6 +5,7 @@
     padding: 1rem;
     width: 100%;
     align-items: center;
+    justify-content: right;
 }
 .navbar .links a{
     color: wheat;
@@ -16,7 +17,7 @@
 
 .links{
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .buttonEditTables{

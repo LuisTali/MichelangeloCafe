@@ -1,8 +1,9 @@
 import React from "react";
+import './ErrorPage.css';
 
 const ErrorPage = () =>{
-    return <div>
-        <h2>Oppss we are missing something...</h2>
+    return <div className="errorPage">
+        <h2>Opss no pudimos encontrar la pagina que deseabas :(</h2>
     </div>
 }
 

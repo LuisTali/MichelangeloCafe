@@ -10,6 +10,11 @@ const navbarRoutes = [
         title: 'Orders'
     },
     {
+        id: 'editTables',
+        path: '/editTables',
+        title: 'Edit Tables'
+    },
+    {
         id: 'help',
         path: '/help',
         title: 'Help'
