@@ -13,3 +13,11 @@
     gap: 2rem;
     justify-content: center;
 }
+.tablesPage.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tablesPage.loading h2{
+    margin-bottom: 4rem;
+}
