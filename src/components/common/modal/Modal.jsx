@@ -25,19 +25,32 @@ export const Modal = ({setIsOpen,state,message,setAnswer,client,setClient}) =>{
                     if(client.name.length < 4 || client.phone.length < 8){
                         let inputs = document.getElementsByTagName("input");
                         for(const input of inputs){
-                            console.log(input.value);
-                            console.log(input.name);
                             if(input.name == 'name' && input.value.length < 4){
+                                let warning = document.createElement("span");
+                                warning.innerHTML = "Ingrese un nombre valido";
+                                let divInput = document.getElementById("inputGroupName")
+                                warning.setAttribute("id","warning1");
                                 input.style.border = "3px solid red";
-                                setTimeout(()=>input.style.border = "none",3000)
+                                divInput.appendChild(warning);
+                                setTimeout(()=>{
+                                    input.style.border = "none"
+                                    warning.remove();
+                                },3000)
                                 //insert After para que aparezca abajo mensaje indicando que no tiene el largo suficiente
                             }
                             if(input.name == 'phone' && input.value.length < 8){
-                                input.style.border = "3px solid red"
-                                setTimeout(()=>input.style.border = "none",3000)
-                                //insert After para que aparezca abajo mensaje indicando que no tiene el largo suficiente
+                                let warning = document.createElement("span"); //Crea Aviso
+                                warning.innerHTML = "Ingrese un telefono valido"; //Setea texto aviso
+                                let divInput = document.getElementById("inputGroupPhone") //Obtiene div del input
+                                warning.setAttribute("id","warning2"); //Setea id para luego removerlo
+                                input.style.border = "3px solid red"; //Borde del input incorrecto seteado a rojo
+                                divInput.appendChild(warning); //Agrega el aviso debajo del input
+                                //input.after(warning,"Fill the phone of the client");
+                                setTimeout(()=>{ //Remueve estados alterados luego de avisar error en los datos
+                                    input.style.border = "none";
+                                    warning.remove();
+                                },3000)
                             }
-                            //setear input en rojo modificando el estilo
                         }
                     }
                     //setAnswer(option);
@@ -56,11 +69,11 @@ export const Modal = ({setIsOpen,state,message,setAnswer,client,setClient}) =>{
     if(state == 4){
         return <div className='chargeModal'>
             <label>{message}</label>
-            <div className="inputGroup">
+            <div className="inputGroup" id="inputGroupName">
                 <label>Nombre:</label>
                 <input name="name" id="clientPhone" className="inputClient" onChange={(e)=>setClient({...client,[e.target.name]:e.target.value})}></input>
             </div>
-            <div className="inputGroup">
+            <div className="inputGroup" id="inputGroupPhone">
                 <label>Telefono:</label>
                 <input name="phone" id="clientName" className="inputClient" onChange={(e)=>setClient({...client,[e.target.name]:e.target.value})}></input>
             </div>
