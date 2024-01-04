@@ -20,4 +20,8 @@
 }
 .tablesPage.loading h2{
     margin-bottom: 4rem;
+    -webkit-animation: linear infinite;
+    -webkit-animation-name: run; /*Animacion seteada en index.css*/
+    -webkit-animation-duration: 2s;
+    margin-bottom: 3rem;
 }

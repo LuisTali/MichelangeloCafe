@@ -1,0 +1,36 @@
+.editTablesPage{
+    padding: 1rem;
+    min-height: 100dvh;
+    height: 100%;
+    background-color: blanchedalmond;
+}
+.editTablesPage.loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.editTablesPage.loading h2 {
+    -webkit-animation: linear infinite;
+    -webkit-animation-name: run; /*Animacion seteada en index.css*/
+    -webkit-animation-duration: 2s;
+    margin-bottom: 3rem;
+}
+.editTablesPage .tables .table{
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+}
+.editTablesPage .tables .table h2{
+    position: initial;
+    color: brown;
+}
+.addTable{
+    border: 4px black;
+    border-style: dashed;
+    background-color: transparent !important;
+}
+
