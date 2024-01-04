@@ -2,26 +2,27 @@ import React, { useEffect, useState } from "react";
 import './TablesPage.css';
 import { Table } from "../../common/table/Table";
 import { db } from "../../../firebaseConfig.jsx";
-import {doc,collection,documentId,getDocs,where,query, Firestore} from 'firebase/firestore';
+import {doc,collection,documentId,getDocs,where,query, Firestore, orderBy} from 'firebase/firestore';
 import kitchenFloor from '../../../assets/kitchenFloor.jpg';
 
 export const TablesPage = () =>{
     
-    //const [tables,setTables] = useState([{id:1,order:[]},{id:2,order:[]},{id:3,order:[]},{id:4,order:[]},{id:5,order:[]}]);
     const [tables,setTables] = useState([]);
     const [loading,setLoading] = useState(true);
     
     useEffect(()=>{
-        let tablesDb
-        getDocs(collection(db,"Tables"))
+        let tablesDb;
+        const tableCollection = collection(db,"Tables");
+        getDocs(query(tableCollection,orderBy('id')))
         .then((res)=>{
-            //setLoading(false);
             tablesDb = res.docs.map((table)=>{
                 return {
-                    ...table.data()
+                    ...table.data(),
+                    order: []
                 }
             })
             setTables(tablesDb);
+            setLoading(false);
         })  
         .catch((err) => console.log(err));  
     },[])

@@ -23,6 +23,8 @@ export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopu
         setModalContent("Producto agregado correctamente");
         setStateModal(1);
         setModalOpen(true);
+        console.log(order);
+        console.log(tables);
     }
 
     const closePopUp = () =>{
