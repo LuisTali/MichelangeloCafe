@@ -16,7 +16,6 @@ export const Modal = ({setIsOpen,state,message,setAnswer,client,setClient}) =>{
     },[state])
 
     const handleAnswerClick = (option) =>{
-        console.log(option);
         if(state == 4){
             if(option != 'no'){
                 if(client.name == undefined || client.phone == undefined){
