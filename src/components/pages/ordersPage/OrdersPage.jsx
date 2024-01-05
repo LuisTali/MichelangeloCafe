@@ -31,7 +31,7 @@ const OrdersPage = () =>{
             setLoading(false);
         })
         .catch((error) => console.log(error))
-    },[order]);
+    },[order,filter]);
 
     if(loading != true){
         return <div className="ordersPage">
