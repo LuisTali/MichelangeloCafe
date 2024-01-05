@@ -13,24 +13,8 @@ import ErrorPage from './components/pages/errorPage/ErrorPage.jsx';
 
 export function App() {
 
-  const [loading,setLoading] = useState(true);
-  //const {tables,setTables} = useContext(TablesContext);
-
   useEffect(()=>{
-    /*let tablesDb;
-        const tableCollection = collection(db,"Tables");
-        getDocs(query(tableCollection,orderBy('id')))
-        .then((res)=>{
-            tablesDb = res.docs.map((table)=>{
-                return {
-                    ...table.data(),
-                    order: []
-                }
-            })
-            setTables(tablesDb);
-            setLoading(false);
-        })  
-        .catch((err) => console.log(err));  */
+    
   },[])
 
   return (

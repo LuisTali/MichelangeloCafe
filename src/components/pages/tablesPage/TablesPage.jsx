@@ -8,12 +8,10 @@ import { TablesContext } from "../../../context/TablesContext.jsx";
 
 export const TablesPage = () =>{
     
-    //const [tables,setTables] = useState([]);
     const [loading,setLoading] = useState(true);
     const {tables,setTables} = useContext(TablesContext);
     
     useEffect(()=>{
-        console.log(tables);
         if(tables.length < 1){
             let tablesDb;
             const tableCollection = collection(db,"Tables");
@@ -22,16 +20,19 @@ export const TablesPage = () =>{
             tablesDb = res.docs.map((table)=>{
                 return {
                     ...table.data(),
-                    order: []
+                    order: [],
+                    openTable: ''
                 }
             })
             setTables(tablesDb);
+            setLoading(false);
         })  
         .catch((err) => console.log(err));  
+        }else{
+            setLoading(false);
         }
-        setLoading(false);
     },[])
-
+    
     if(loading) return <div className="tablesPage loading" style={{backgroundImage:`url(${kitchenFloor})`}}>
         <h2>Loading...</h2>
     </div>
@@ -39,7 +40,7 @@ export const TablesPage = () =>{
 
     return <div className="tablesPage" style={{backgroundImage:`url(${kitchenFloor})`}}>
         <div className="tables">
-            {tables.map((table) => <Table key={table.id} id={table.id} order={table.order} tables={tables} setTables={setTables}/>)}
+            {tables.map((table) => <Table key={table.id} id={table.id} openTable={table.openTable} order={table.order} tables={tables} setTables={setTables}/>)}
         </div>
     </div>
 
