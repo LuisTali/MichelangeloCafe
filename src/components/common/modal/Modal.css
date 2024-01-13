@@ -3,12 +3,21 @@
     padding: 0.25rem 0.5rem;
     border-radius: 10px;
     box-shadow: 0px 0px 5px 0px black;
+    height: fit-content;
 }
 .modal.success{
     background-color: greenyellow;
 }
 .modal.failure{
     background-color: red;
+}
+.modal label{
+    position: fixed;
+    margin: 0 !important;
+    position: unset !important;
+    text-align: center;
+    height: fit-content;
+    
 }
 
 .confirmModal{
@@ -78,6 +87,9 @@
 }
 
 @media screen and (max-width:500px){
+    .modal{
+        width: 90%;
+    }
     .chargeModal{
         width: 90%;
     }

@@ -33,7 +33,7 @@ export const TableOrdersPopUp = ({id,order,tables,setTables,setOrdersOpen,isPopu
     return <div id={`popUpTableOrder${id}`} className='popUpTableOrder'>
         <label>{`Ordenes Mesa ${id}`}</label>
 
-        <input id="filterSelect" type="text" onChange={(e) => setSearch(e.target.value)}></input>
+        <input id="filterSelect" type="text" onChange={(e) => setSearch(e.target.value)} placeholder="Escribe un producto..."></input>
         <select id="selectOrder">
             {products.filter((product) => (search != '' ? product.title.toLowerCase().startsWith(search.toLowerCase()) : product)).map((product,index) => <option key={index}>{product.title}</option>)}
         </select>
